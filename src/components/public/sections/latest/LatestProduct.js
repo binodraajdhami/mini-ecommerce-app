@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import ProductCard from './../../../reuseable-component/ProductCard';
+import QuickView from './../../../reuseable-component/QuickView';
+
 const LatestProduct = () => {
+
+    const [isVisible, setIsVisible] = useState(false);
+    const [productItem, setProductItem] = useState({});
+
+    const handleQuickView = (product) => {
+        setProductItem(product);
+        setIsVisible(true);
+    }
 
     const LatestProducts = [
         {
@@ -74,57 +85,31 @@ const LatestProduct = () => {
         let productUrl = `product/${item.id}`;
         return (
             <div key={i} className="col-md-3 col-md-4">
-                <div className="product-content-item wow fadeInUp">
-                    <div className="product-thumbnail" style={{ background: `URL( ${item.beforeImage} )`, backgroundSize: 'cover' }}>
-                        <img src={item.afterImage} alt="before_image" />
-                        <div className="hover-layer">
-                            <ul>
-                                <li>
-                                    <span className="button">
-                                        <span>Quick View</span>
-                                        <i className="fa fa-eye"></i>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span className="button">
-                                        <span>Add To Cart</span>
-                                        <i className="fa fa-shopping-cart"></i>
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                        <span className="whishlist">
-                            <span>
-                                <i className="fa fa-heart"></i>
-                            </span>
-                        </span>
-                    </div>
-                    <div className="product-details">
-                        <h4><Link to={productUrl}>{item.title}</Link></h4>
-                        <p>Rs. {item.price} /-</p>
-                    </div>
-                </div>
+                <ProductCard product={item} productUrl={productUrl} cbFunction={handleQuickView} />
             </div>
         );
     });
 
     return (
-        <section className="latest-product">
-            <div className="container">
-                <div className="latest-product-heading">
-                    <h2>Latest</h2>
-                    <h4>Top view in this week</h4>
-                </div>
-                <div className="latest-content-body">
-                    <div className="row">
-                        {product}
+        <>
+            <section className="latest-product">
+                <div className="container">
+                    <div className="latest-product-heading">
+                        <h2>Latest</h2>
+                        <h4>Top view in this week</h4>
                     </div>
-                    <div className="all-latest-product-link">
-                        <Link to="/product">All Products</Link>
+                    <div className="latest-content-body">
+                        <div className="row">
+                            {product}
+                        </div>
+                        <div className="all-latest-product-link">
+                            <Link to="/product">View All Products</Link>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+            <QuickView value={isVisible} onclose={() => setIsVisible(false)} product={productItem} />
+        </>
     );
 }
 

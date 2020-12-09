@@ -23,7 +23,7 @@ const About = () => {
             </div>
             <div className="content">
                 <div className="container">
-                    <h1>About</h1>
+                    <h2>About</h2>
                     <p>This is about page content.</p>
                 </div>
             </div>

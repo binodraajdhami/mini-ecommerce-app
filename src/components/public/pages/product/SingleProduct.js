@@ -2,18 +2,14 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ReactImageMagnify from 'react-image-magnify';
 import Slider from 'react-slick';
-import { Tabs, Tab } from '@material-ui/core';
+
+import SpecificationProduct from './ProductSpecification';
+import RelatedProduct from './RelatedProduct';
 
 const SingleProduct = () => {
 
     const [cartItem, setCartItem] = useState(0);
     const [whishlist, setWhishlist] = useState(false);
-
-    const [selectedTab, setSelectedTab] = useState(0);
-
-    const handleTabChange = (event, newValue) => {
-        setSelectedTab(newValue);
-    }
 
     const colorLists = [
         { id: 1, color: '#1abc9c' },
@@ -46,7 +42,7 @@ const SingleProduct = () => {
         verticalSwiping: true,
     };
 
-    const [imageUrl, setImage] = useState(process.env.PUBLIC_URL + '/assets/images/popular-product-image1.jpg');
+    const [imageUrl, setImageUrl] = useState(process.env.PUBLIC_URL + '/assets/images/popular-product-image1.jpg');
 
     const imageGallery = [
         {
@@ -93,122 +89,7 @@ const SingleProduct = () => {
 
     let images = imageGallery.map((item, i) => {
         return (
-            <img src={item.image} alt="image_gallery" key={i} onClick={() => setImage(item.image)} />
-        );
-    });
-
-    const productSliderOptions = {
-        dots: false,
-        autoplay: true,
-        infinite: true,
-        speed: 300,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        className: 'row'
-    };
-
-    const relatedProducts = [
-        {
-            id: 1,
-            title: 'City Backpack Black',
-            price: '250',
-            decription: 'Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish sporty vibe.',
-            beforeImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image1.jpg',
-            afterImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image2.jpg',
-        },
-        {
-            id: 2,
-            title: 'Skinny Jeans In Black',
-            price: '100',
-            decription: 'Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish sporty vibe.',
-            beforeImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image3.jpg',
-            afterImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image4.jpg',
-        },
-        {
-            id: 3,
-            title: 'Mercury Tee',
-            price: '680',
-            decription: 'Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish sporty vibe.',
-            beforeImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image5.jpg',
-            afterImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image6.jpg',
-        },
-        {
-            id: 4,
-            title: 'Herschel Retreat Backpack',
-            price: '490',
-            decription: 'Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish sporty vibe.',
-            beforeImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image7.jpg',
-            afterImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image8.jpg',
-        },
-        {
-            id: 5,
-            title: 'Short Sleeved Hoodie',
-            price: '290',
-            decription: 'Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish sporty vibe.',
-            beforeImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image9.jpg',
-            afterImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image10.jpg',
-        },
-        {
-            id: 6,
-            title: 'Sweatshirt in Geometric Print',
-            price: '350',
-            decription: 'Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish sporty vibe.',
-            beforeImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image11.jpg',
-            afterImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image12.jpg',
-        },
-        {
-            id: 7,
-            title: 'Dusk Pom Beanie',
-            price: '115',
-            decription: 'Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish sporty vibe.',
-            beforeImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image13.jpg',
-            afterImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image14.jpg',
-        },
-        {
-            id: 8,
-            title: 'Circle Snapback Cap',
-            price: '750',
-            decription: 'Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish sporty vibe.',
-            beforeImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image15.jpg',
-            afterImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image16.jpg',
-        }
-    ]
-
-    let products = relatedProducts.map((item, i) => {
-        let productUrl = `/product/${item.id}`;
-        return (
-            <div key={i} className="col-sm-3">
-                <div className="product-content-item">
-                    <div className="product-thumbnail" style={{ background: `URL( ${item.beforeImage} )`, backgroundSize: 'cover' }}>
-                        <img src={item.afterImage} alt="before_image" />
-                        <div className="hover-layer">
-                            <ul>
-                                <li>
-                                    <span className="button">
-                                        <span>Quick View</span>
-                                        <i className="fa fa-eye"></i>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span className="button">
-                                        <span>Add To Cart</span>
-                                        <i className="fa fa-shopping-cart"></i>
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                        <span className="whishlist">
-                            <span>
-                                <i className="fa fa-heart"></i>
-                            </span>
-                        </span>
-                    </div>
-                    <div className="product-details">
-                        <h4><Link to={productUrl}>{item.title}</Link></h4>
-                        <p>Rs. {item.price} /-</p>
-                    </div>
-                </div>
-            </div>
+            <img src={item.image} alt="image_gallery" key={i} onClick={() => setImageUrl(item.image)} />
         );
     });
 
@@ -328,21 +209,8 @@ const SingleProduct = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="product-specifications">
-                        <h4>Product Specifications</h4>
-
-                        <Tabs value={selectedTab} onChange={handleTabChange}>
-                            <Tab label="Specification" />
-                            <Tab label="Reviews" />
-                        </Tabs>
-
-                    </div>
-                    <div className="related-product">
-                        <h4>Related Products</h4>
-                        <Slider {...productSliderOptions}>
-                            {products}
-                        </Slider>
-                    </div>
+                    <SpecificationProduct />
+                    <RelatedProduct />
                 </div>
             </div>
         </>

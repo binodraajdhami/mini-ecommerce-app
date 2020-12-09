@@ -1,9 +1,18 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import Slider from 'react-slick';
-import { Button, Modal } from 'react-bootstrap';
+
+import ProductCard from './../../../reuseable-component/ProductCard';
+import QuickView from './../../../reuseable-component/QuickView';
 
 const TrendingProduct = () => {
+
+    const [isVisible, setIsVisible] = useState(false);
+    const [productItem, setProductItem] = useState({});
+
+    const handleQuickView = (product) => {
+        setProductItem(product);
+        setIsVisible(true);
+    }
 
     const sliderOptions = {
         dots: false,
@@ -79,69 +88,34 @@ const TrendingProduct = () => {
             beforeImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image15.jpg',
             afterImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image16.jpg',
         }
-    ]
+    ];
 
     const product = TrendingProducts.map((item, i) => {
         let productUrl = `/product/${item.id}`;
         return (
             <div key={i} className="col-sm-3">
-                <div className="product-content-item">
-                    <div className="product-thumbnail" style={{ background: `URL( ${item.beforeImage} )`, backgroundSize: 'cover' }}>
-                        <img src={item.afterImage} alt="before_image" />
-                        <div className="hover-layer">
-                            <ul>
-                                <li>
-                                    <span className="button">
-                                        <span>Quick View</span>
-                                        <i className="fa fa-eye"></i>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span className="button">
-                                        <span>Add To Cart</span>
-                                        <i className="fa fa-shopping-cart"></i>
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                        <span className="whishlist">
-                            <span>
-                                <i className="fa fa-heart"></i>
-                            </span>
-                        </span>
-                    </div>
-                    <div className="product-details">
-                        <h4><Link to={productUrl}>{item.title}</Link></h4>
-                        <p>Rs. {item.price} /-</p>
-                    </div>
-                </div>
+                <ProductCard product={item} productUrl={productUrl} cbFunction={handleQuickView} />
             </div>
         );
     });
 
     return (
-        <section className="popular-product">
-            <div className="container">
-                <div className="popular-product-heading">
-                    <h2>Trending</h2>
-                    <h4>Top sale in this week</h4>
+        <>
+            <section className="popular-product">
+                <div className="container">
+                    <div className="popular-product-heading">
+                        <h2>Trending</h2>
+                        <h4>Top sale in this week</h4>
+                    </div>
+                    <div className="popular-product-body">
+                        <Slider {...sliderOptions}>
+                            {product}
+                        </Slider>
+                    </div>
                 </div>
-                <div className="popular-product-body">
-                    <Slider {...sliderOptions}>
-                        {product}
-                    </Slider>
-                </div>
-            </div>
-            <Modal>
-                <Modal.Header>Title</Modal.Header>
-                <Modal.Body>
-                    Body
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button>Close</Button>
-                </Modal.Footer>
-            </Modal>
-        </section >
+            </section >
+            <QuickView value={isVisible} onclose={() => setIsVisible(false)} product={productItem} />
+        </>
     );
 }
 

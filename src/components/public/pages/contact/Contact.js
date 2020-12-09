@@ -23,7 +23,7 @@ const Contact = () => {
             </div>
             <div className="content">
                 <div className="container">
-                    <h1>Contact Us</h1>
+                    <h2>Contact Us</h2>
                     <p>This is Contact Us page content.</p>
                 </div>
             </div>

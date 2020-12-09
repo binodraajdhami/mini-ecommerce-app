@@ -20,7 +20,7 @@ const BlogPost = () => {
             title: 'Style for couple in Weeding season',
             author: 'Admin',
             postOn: '15 September, 2019',
-            decription: 'Typography is the work of typesetters, compositors, typographers, graphic designers, art directors, manga artists, comic book artists, graffiti artists,...',
+            decription: 'Typography is the work of typesetters, compositors, typographers...',
             image: process.env.PUBLIC_URL + '/assets/images/blog-image1.jpg'
         },
         {
@@ -28,7 +28,7 @@ const BlogPost = () => {
             title: 'The Easiest Way to Break Out on Top',
             author: 'Admin',
             postOn: '18 September, 2019',
-            decription: 'Typography is the work of typesetters, compositors, typographers, graphic designers, art directors, manga artists, comic book artists, graffiti artists,...',
+            decription: 'Typography is the work of typesetters, compositors, typographers...',
             image: process.env.PUBLIC_URL + '/assets/images/blog-image2.jpg'
         },
         {
@@ -36,7 +36,7 @@ const BlogPost = () => {
             title: 'Spring – Summer Trending 2020',
             author: 'Admin',
             postOn: '20 September, 2019',
-            decription: 'Typography is the work of typesetters, compositors, typographers, graphic designers, art directors, manga artists, comic book artists, graffiti artists,...',
+            decription: 'Typography is the work of typesetters, compositors, typographers...',
             image: process.env.PUBLIC_URL + '/assets/images/blog-image3.jpg'
         },
         {
@@ -44,7 +44,7 @@ const BlogPost = () => {
             title: 'Style for couple in Weeding season',
             author: 'Admin',
             postOn: '15 September, 2019',
-            decription: 'Typography is the work of typesetters, compositors, typographers, graphic designers, art directors, manga artists, comic book artists, graffiti artists,...',
+            decription: 'Typography is the work of typesetters, compositors, typographers...',
             image: process.env.PUBLIC_URL + '/assets/images/blog-image1.jpg'
         },
         {
@@ -52,7 +52,7 @@ const BlogPost = () => {
             title: 'The Easiest Way to Break Out on Top',
             author: 'Admin',
             postOn: '18 September, 2019',
-            decription: 'Typography is the work of typesetters, compositors, typographers, graphic designers, art directors, manga artists, comic book artists, graffiti artists,...',
+            decription: 'Typography is the work of typesetters, compositors, typographers...',
             image: process.env.PUBLIC_URL + '/assets/images/blog-image2.jpg'
         },
         {
@@ -60,7 +60,7 @@ const BlogPost = () => {
             title: 'Spring – Summer Trending 2020',
             author: 'Admin',
             postOn: '20 September, 2019',
-            decription: 'Typography is the work of typesetters, compositors, typographers, graphic designers, art directors, manga artists, comic book artists, graffiti artists,...',
+            decription: 'Typography is the work of typesetters, compositors, typographers...',
             image: process.env.PUBLIC_URL + '/assets/images/blog-image3.jpg'
         }
     ]

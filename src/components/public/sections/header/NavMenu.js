@@ -18,12 +18,6 @@ const NavMenu = () => {
                     <li>
                         <NavLink to="/contact-us" activeClassName="active">Contact</NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/auth/login" activeClassName="active" className="btn-login">Login</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/auth/register" activeClassName="active" className="btn-register">Register</NavLink>
-                    </li>
                 </ul>
             </nav>
         </div>
