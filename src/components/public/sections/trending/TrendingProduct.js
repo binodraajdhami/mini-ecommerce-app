@@ -1,19 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Slider from 'react-slick';
 
 import ProductCard from './../../../reuseable-component/ProductCard';
-import QuickView from './../../../reuseable-component/QuickView';
 
 const TrendingProduct = () => {
-
-    const [isVisible, setIsVisible] = useState(false);
-    const [productItem, setProductItem] = useState({});
-
-    const handleQuickView = (product) => {
-        setProductItem(product);
-        setIsVisible(true);
-    }
-
     const sliderOptions = {
         dots: false,
         autoplay: true,
@@ -94,28 +84,26 @@ const TrendingProduct = () => {
         let productUrl = `/product/${item.id}`;
         return (
             <div key={i} className="col-sm-3">
-                <ProductCard product={item} productUrl={productUrl} cbFunction={handleQuickView} />
+                <ProductCard product={item} productUrl={productUrl} />
             </div>
         );
     });
 
     return (
-        <>
-            <section className="popular-product">
-                <div className="container">
-                    <div className="popular-product-heading">
-                        <h2>Trending</h2>
-                        <h4>Top sale in this week</h4>
-                    </div>
-                    <div className="popular-product-body">
-                        <Slider {...sliderOptions}>
-                            {product}
-                        </Slider>
-                    </div>
+
+        <section className="popular-product">
+            <div className="container">
+                <div className="popular-product-heading">
+                    <h2>Trending</h2>
+                    <h4>Top sale in this week</h4>
                 </div>
-            </section >
-            <QuickView value={isVisible} onclose={() => setIsVisible(false)} product={productItem} />
-        </>
+                <div className="popular-product-body">
+                    <Slider {...sliderOptions}>
+                        {product}
+                    </Slider>
+                </div>
+            </div>
+        </section >
     );
 }
 

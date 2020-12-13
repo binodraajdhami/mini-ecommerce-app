@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ReactImageMagnify from 'react-image-magnify';
 import Rodal from 'rodal';
 
 import 'rodal/lib/rodal.css';
 
-const QuickView = ({ value, onclose, product }) => {
+import { QuickViewContext } from './../../contextAPI/QuickViewContext';
+
+const QuickView = () => {
+
+    const quickViewItem = useContext(QuickViewContext)[0];
+    const inVisibleItem = useContext(QuickViewContext)[2];
+    const setInVisibleItem = useContext(QuickViewContext)[3];
 
     const [cartItem, setCartItem] = useState(0);
     const [whishlist, setWhishlist] = useState(false);
@@ -29,26 +35,28 @@ const QuickView = ({ value, onclose, product }) => {
         );
     });
 
-    let reactMagnifyImage = product.beforeImage
-        ? <ReactImageMagnify {...{
-            smallImage: {
-                alt: 'Wristwatch by Ted Baker London',
-                isFluidWidth: true,
-                src: product.beforeImage
-            },
-            largeImage: {
-                src: product.beforeImage,
-                width: 1400,
-                height: 1800
-            }
-        }} />
+    let reactMagnifyImage = quickViewItem
+        ? quickViewItem.beforeImage
+            ? <ReactImageMagnify {...{
+                smallImage: {
+                    alt: quickViewItem.title,
+                    isFluidWidth: true,
+                    src: quickViewItem.beforeImage
+                },
+                largeImage: {
+                    src: quickViewItem.beforeImage,
+                    width: 1400,
+                    height: 1800
+                }
+            }} />
+            : ''
         : '';
 
     return (
         <div className="quick-view-modal">
             <Rodal
-                visible={value}
-                onClose={onclose}
+                visible={inVisibleItem}
+                onClose={() => setInVisibleItem(false)}
                 enterAnimation="slideDown"
                 leaveAnimation="slideUp"
             >
@@ -61,9 +69,9 @@ const QuickView = ({ value, onclose, product }) => {
                     <div className="col-sm-7">
                         <div className="quick-view-product-details">
 
-                            <h2>{product.title}</h2>
-                            <h4 className="price">Rs. {product.price} /-</h4>
-                            <p>{product.decription}</p>
+                            <h2>{quickViewItem.title}</h2>
+                            <h4 className="price">Rs. {quickViewItem.price} /-</h4>
+                            <p>{quickViewItem.decription}</p>
 
                             <div className="select-product-color">
                                 <h4>Colors: </h4>
@@ -113,7 +121,21 @@ const QuickView = ({ value, onclose, product }) => {
                                     }
                                 </div>
                             </div>
-
+                            <div className="product-category-info">
+                                <h4>Category</h4>
+                                <ul>
+                                    <li>Womens</li>
+                                    <li>Womens Bags</li>
+                                </ul>
+                            </div>
+                            <div className="product-tags-info">
+                                <h4>Tags</h4>
+                                <ul>
+                                    <li>Womens</li>
+                                    <li>Bags</li>
+                                    <li>Accessories</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>

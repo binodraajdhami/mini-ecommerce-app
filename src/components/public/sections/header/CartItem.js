@@ -1,9 +1,13 @@
 import React from 'react';
 
+import TotalCartItem from './../../../reuseable-component/TotalCartItem';
+
 const CartItem = () => {
     return (
         <div className="cart-item">
-            <span><i className="fa fa-cart-plus"></i> 0 Items</span>
+            <span>
+                <i className="fa fa-cart-plus"></i>  <TotalCartItem /> Items
+                </span>
         </div>
     );
 }

@@ -1,7 +1,35 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-const ProductCard = ({ product, productUrl, cbFunction }) => {
+import { CartItemContext } from './../../contextAPI/CartItemContext';
+import { QuickViewContext } from './../../contextAPI/QuickViewContext';
+
+const ProductCard = ({ product, productUrl }) => {
+
+    const cartItems = useContext(CartItemContext)[0];
+    const setCartItems = useContext(CartItemContext)[1];
+    const setIsVisibleSideCartItem = useContext(CartItemContext)[3];
+    const setQuickViewItem = useContext(QuickViewContext)[1];
+    const setInVisibleItem = useContext(QuickViewContext)[3];
+
+    const handleAddToCard = (item) => {
+
+        let exitedItem = cartItems.filter(e => e.id === item.id);
+        if (!exitedItem.length) {
+            item.quanty = 1;
+            let newCartItem = cartItems.filter(e => e.id !== item.id);
+            setCartItems([...newCartItem, item]);
+        } else {
+            cartItems.map(e => e.id === item.id ? e.quanty = e.quanty + 1 : e.quanty);
+            setCartItems(() => [...cartItems]);
+        }
+        setIsVisibleSideCartItem(true);
+    }
+
+    const handleQuickView = (item) => {
+        setQuickViewItem(item);
+        setInVisibleItem(true);
+    }
 
     return (
         <div className="product-content-item">
@@ -10,16 +38,16 @@ const ProductCard = ({ product, productUrl, cbFunction }) => {
                 <div className="hover-layer">
                     <ul>
                         <li>
-                            <span className="button" onClick={() => cbFunction(product)}>
-                                <span>Quick View</span>
+                            <div className="button button-ripple" onClick={() => handleQuickView(product)}>
+                                <div className="move-to-top">Quick View</div>
                                 <i className="fa fa-eye"></i>
-                            </span>
+                            </div>
                         </li>
                         <li>
-                            <span className="button">
-                                <span>Add To Cart</span>
+                            <div className="button button-ripple" onClick={() => handleAddToCard(product)}>
+                                <div className="move-to-top">Add To Cart</div>
                                 <i className="fa fa-shopping-cart"></i>
-                            </span>
+                            </div>
                         </li>
                     </ul>
                 </div>

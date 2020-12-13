@@ -4,9 +4,16 @@ import AppRouting from './app.routing';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import { CartItemProvider } from './contextAPI/CartItemContext';
+import { QuickViewContextProvider } from './contextAPI/QuickViewContext'
+
 const App = () => {
     return (
-        <AppRouting />
+        <CartItemProvider>
+            <QuickViewContextProvider>
+                <AppRouting />
+            </QuickViewContextProvider>
+        </CartItemProvider>
     );
 }
 

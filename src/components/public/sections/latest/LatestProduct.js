@@ -1,18 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import ProductCard from './../../../reuseable-component/ProductCard';
-import QuickView from './../../../reuseable-component/QuickView';
 
 const LatestProduct = () => {
-
-    const [isVisible, setIsVisible] = useState(false);
-    const [productItem, setProductItem] = useState({});
-
-    const handleQuickView = (product) => {
-        setProductItem(product);
-        setIsVisible(true);
-    }
 
     const LatestProducts = [
         {
@@ -84,32 +75,29 @@ const LatestProduct = () => {
     const product = LatestProducts.map((item, i) => {
         let productUrl = `product/${item.id}`;
         return (
-            <div key={i} className="col-md-3 col-md-4">
-                <ProductCard product={item} productUrl={productUrl} cbFunction={handleQuickView} />
+            <div key={i} className="col-md-3 col-sm-4">
+                <ProductCard product={item} productUrl={productUrl} />
             </div>
         );
     });
 
     return (
-        <>
-            <section className="latest-product">
-                <div className="container">
-                    <div className="latest-product-heading">
-                        <h2>Latest</h2>
-                        <h4>Top view in this week</h4>
+        <section className="latest-product">
+            <div className="container">
+                <div className="latest-product-heading">
+                    <h2>Latest</h2>
+                    <h4>Top view in this week</h4>
+                </div>
+                <div className="latest-content-body">
+                    <div className="row">
+                        {product}
                     </div>
-                    <div className="latest-content-body">
-                        <div className="row">
-                            {product}
-                        </div>
-                        <div className="all-latest-product-link">
-                            <Link to="/product">View All Products</Link>
-                        </div>
+                    <div className="all-latest-product-link">
+                        <Link to="/product">View All Products</Link>
                     </div>
                 </div>
-            </section>
-            <QuickView value={isVisible} onclose={() => setIsVisible(false)} product={productItem} />
-        </>
+            </div>
+        </section>
     );
 }
 
