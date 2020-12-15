@@ -39,14 +39,14 @@ const QuickView = () => {
     }, [cartItems, wishlistItems, quickViewItem.id]);
 
     const handleAddToWishlist = (item) => {
+        setWishlistItems(prevWishlistItemsItem => [...prevWishlistItemsItem, item]);
         setCurrentWishlist(false);
-        setWishlistItems(prevItem => [...wishlistItems, item]);
     }
 
     const handleRemoveToWishlist = (item) => {
-        setCurrentWishlist(false);
-        let exitedWishlistItem = cartItems.filter(e => e.id !== item.id);
-        setWishlistItems([exitedWishlistItem]);
+        let latestWishlistItem = wishlistItems.filter(e => e.id !== item.id);
+        setWishlistItems([...latestWishlistItem]);
+        setCurrentWishlist(true);
     }
 
     const handleAddToCard = (item) => {
