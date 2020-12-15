@@ -8,7 +8,7 @@ const CopyRight = () => {
             <GotoTop />
             <div className="container">
                 <div className="copyright wow zoomIn">
-                    <p>Copyright © 2020 - React Ecommerce. All Rights Reserved.</p>
+                    <p>Copyright © {new Date().getFullYear()} - Mini Ecommerce React App. All Rights Reserved. Developed by: Binod RD</p>
                 </div>
             </div>
         </div>

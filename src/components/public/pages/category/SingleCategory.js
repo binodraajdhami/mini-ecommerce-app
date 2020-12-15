@@ -2,17 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import ProductCard from './../../../reuseable-component/ProductCard';
-import QuickView from './../../../reuseable-component/QuickView';
 
 const SingleCategory = () => {
-
-    const [isVisible, setIsVisible] = useState(false);
-    const [productItem, setProductItem] = useState({});
-
-    const handleQuickView = (product) => {
-        setProductItem(product);
-        setIsVisible(true);
-    }
 
     const allProducts = [
         {
@@ -149,7 +140,7 @@ const SingleCategory = () => {
         let productUrl = `/product/${item.id}`;
         return (
             <div key={i} className="col-md-3">
-                <ProductCard product={item} productUrl={productUrl} cbFunction={handleQuickView} />
+                <ProductCard product={item} productUrl={productUrl} />
             </div>
         );
     });
@@ -183,7 +174,6 @@ const SingleCategory = () => {
                     </div>
                 </div>
             </div>
-            <QuickView value={isVisible} onclose={() => setIsVisible(false)} product={productItem} />
         </>
     );
 }

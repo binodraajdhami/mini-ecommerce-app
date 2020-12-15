@@ -13,10 +13,10 @@ const ContactInfo = () => {
                     <i className="fa fa-phone"></i> 9843779778
                 </li>
                 <li>
-                    <i className="fa fa-envelope"></i> ngecommerce@gmail.com
+                    <i className="fa fa-envelope"></i> binodd680@gmail.com
                 </li>
                 <li>
-                    <i className="fa fa-map-marker"></i> New Baneswor, Kathmandu
+                    <i className="fa fa-map-marker"></i> Hattiban, Lalitpur, Nepal
                 </li>
             </ul>
         </div>

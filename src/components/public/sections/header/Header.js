@@ -6,7 +6,7 @@ import SocialMedia from './SocialMedia';
 import Logo from './Logo';
 import NavMenu from './NavMenu';
 import HeaderSearchForm from './HeaderSearchForm';
-import CartItem from './CartItem';
+import HeaderCartItem from './HeaderCartItem';
 
 const Header = () => {
     return (
@@ -39,7 +39,7 @@ const Header = () => {
                             <HeaderSearchForm />
                         </div>
                         <div className="col-md-2">
-                            <CartItem />
+                            <HeaderCartItem />
                         </div>
                     </div>
                 </div>

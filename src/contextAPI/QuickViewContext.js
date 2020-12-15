@@ -8,7 +8,13 @@ export const QuickViewContextProvider = (props) => {
     const [inVisibleItem, setInVisibleItem] = useState(false);
 
     return (
-        <QuickViewContext.Provider value={[quickViewItem, setQuickViewItem, inVisibleItem, setInVisibleItem]}>
+        <QuickViewContext.Provider value={
+            [quickViewItem,
+                setQuickViewItem,
+                inVisibleItem,
+                setInVisibleItem
+            ]
+        }>
             {props.children}
         </QuickViewContext.Provider>
     );

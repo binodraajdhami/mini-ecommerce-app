@@ -20,7 +20,7 @@ const CartItemList = () => {
                             })
                         }
                     </ul>
-                    : <p>You don't have any item in cart yet.</p>
+                    : <p className="side-cart-item-no-content">You don't have any item in cart yet.</p>
             }
         </>
     );

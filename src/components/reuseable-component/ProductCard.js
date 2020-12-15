@@ -20,7 +20,7 @@ const ProductCard = ({ product, productUrl }) => {
             let newCartItem = cartItems.filter(e => e.id !== item.id);
             setCartItems([...newCartItem, item]);
         } else {
-            cartItems.map(e => e.id === item.id ? e.quanty = e.quanty + 1 : e.quanty);
+            cartItems.map(e => e.id === item.id ? e.quanty = (e.quanty + 1) : e.quanty);
             setCartItems(() => [...cartItems]);
         }
         setIsVisibleSideCartItem(true);

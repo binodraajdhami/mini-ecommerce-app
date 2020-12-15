@@ -6,6 +6,7 @@ import 'rodal/lib/rodal.css';
 import { CartItemContext } from './../../contextAPI/CartItemContext';
 import CartItemList from './CartItemList';
 import TotalCartItem from './TotalCartItem';
+import TotalPrice from './TotalPrice';
 
 const SideCartItem = () => {
 
@@ -38,7 +39,18 @@ const SideCartItem = () => {
                 <div className="side-cart-item-heading">My Cart Items (<TotalCartItem />)</div>
                 <CartItemList />
                 <div className="side-cart-item-checkout">
-                    <h4>Total Price: Rs.</h4>
+                    <table className="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th>Total Items:</th>
+                                <td><TotalCartItem /></td>
+                            </tr>
+                            <tr>
+                                <th>Total Price:</th>
+                                <td>Rs. <TotalPrice /></td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <Link to="/checkout" onClick={handleModalInVisible}>Checkout Now</Link>
                 </div>
             </Rodal>

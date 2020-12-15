@@ -1,10 +1,10 @@
 import React from 'react';
 
-import TotalCartItem from './../../../reuseable-component/TotalCartItem';
+import TotalCartItem from '../../../reuseable-component/TotalCartItem';
 
-const CartItem = () => {
+const HeaderCartItem = () => {
     return (
-        <div className="cart-item">
+        <div className="header-cart-item">
             <span>
                 <i className="fa fa-cart-plus"></i>  <TotalCartItem /> Items
                 </span>
@@ -12,4 +12,4 @@ const CartItem = () => {
     );
 }
 
-export default CartItem;
+export default HeaderCartItem;

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ReactImageMagnify from 'react-image-magnify';
 import Rodal from 'rodal';
@@ -6,16 +6,81 @@ import Rodal from 'rodal';
 import 'rodal/lib/rodal.css';
 
 import { QuickViewContext } from './../../contextAPI/QuickViewContext';
+import { CartItemContext } from '../../contextAPI/CartItemContext';
+import { WishlistContext } from './../../contextAPI/WishlistContext'
 
 const QuickView = () => {
 
     const quickViewItem = useContext(QuickViewContext)[0];
     const inVisibleItem = useContext(QuickViewContext)[2];
     const setInVisibleItem = useContext(QuickViewContext)[3];
+    const cartItems = useContext(CartItemContext)[0];
+    const setCartItems = useContext(CartItemContext)[1];
+    const [wishlistItems, setWishlistItems] = useContext(WishlistContext)
 
     const [cartItem, setCartItem] = useState(0);
-    const [whishlist, setWhishlist] = useState(false);
+    const [currentWishlist, setCurrentWishlist] = useState(true);
     const [selectedIndex, setSelectedIndex] = useState(0);
+
+    useEffect(() => {
+        let currentItem = cartItems.filter(e => e.id === quickViewItem.id);
+        if (!currentItem.length) {
+            setCartItem(0);
+        } else {
+            setCartItem(currentItem[0].quanty);
+        }
+
+        let currentWishlist = wishlistItems.filter(e => e.id === quickViewItem.id);
+        if (!currentWishlist.length) {
+            setCurrentWishlist(true);
+        } else {
+            setCurrentWishlist(false);
+        }
+    }, [cartItems, wishlistItems, quickViewItem.id]);
+
+    const handleAddToWishlist = (item) => {
+        setCurrentWishlist(false);
+        setWishlistItems(prevItem => [...wishlistItems, item]);
+    }
+
+    const handleRemoveToWishlist = (item) => {
+        setCurrentWishlist(false);
+        let exitedWishlistItem = cartItems.filter(e => e.id !== item.id);
+        setWishlistItems([exitedWishlistItem]);
+    }
+
+    const handleAddToCard = (item) => {
+        setCartItem(cartItem + 1);
+
+        let exitedItem = cartItems.filter(e => e.id === item.id);
+        if (!exitedItem.length) {
+            item.quanty = 1;
+            let newCartItem = cartItems.filter(e => e.id !== item.id);
+            setCartItems([...newCartItem, item]);
+        } else {
+            cartItems.map(e => e.id === item.id ? e.quanty = (e.quanty + 1) : e.quanty);
+            setCartItems(() => [...cartItems]);
+        }
+    }
+
+    const handleRemoveFromCard = (item) => {
+        setCartItem(cartItem - 1);
+
+        let exitedItem = cartItems.filter(e => e.id === item.id);
+        if (exitedItem.length) {
+            cartItems.map((e, i) => e.id === item.id
+                ? e.quanty > 1
+                    ? e.quanty = (e.quanty - 1)
+                    : cartItems.splice(i, 1)
+                : e.quanty
+            );
+            setCartItems(() => [...cartItems]);
+        }
+    }
+
+    const handleCloseModalBox = () => {
+        setInVisibleItem(false)
+    }
 
     const colorLists = [
         { id: 1, color: '#1abc9c' },
@@ -85,7 +150,7 @@ const QuickView = () => {
                                 {
                                     cartItem <= 0
                                         ? <div className="add-to-cart-button">
-                                            <span className="btn btn-success" onClick={() => setCartItem(cartItem + 1)}>Add To Cart</span>
+                                            <span className="btn btn-success" onClick={() => handleAddToCard(quickViewItem)}>Add To Cart</span>
                                         </div>
                                         : ''
                                 }
@@ -93,13 +158,13 @@ const QuickView = () => {
                                     cartItem > 0
                                         ? <>
                                             <div className="after-add-to-cart-button">
-                                                <span className="btn btn-success" onClick={() => setCartItem(cartItem - 1)}>
+                                                <span className="btn btn-success" onClick={() => handleRemoveFromCard(quickViewItem)}>
                                                     <i className="fa fa-minus"></i>
                                                 </span>
                                                 <span className="cart-item">{cartItem}</span>
                                                 {
                                                     cartItem < 10
-                                                        ? <span className="btn btn-success" onClick={() => setCartItem(cartItem + 1)}>
+                                                        ? <span className="btn btn-success" onClick={() => handleAddToCard(quickViewItem)}>
                                                             <i className="fa fa-plus"></i>
                                                         </span>
                                                         : <span className="btn btn-danger">
@@ -107,7 +172,7 @@ const QuickView = () => {
                                                         </span>
                                                 }
                                             </div>
-                                            <Link to="/cart" className="btn btn-danger view-cart">View Cart</Link>
+                                            <Link to="/cart" className="btn btn-primary view-cart" onClick={handleCloseModalBox}>View Cart</Link>
                                         </>
                                         : ''
                                 }
@@ -115,9 +180,16 @@ const QuickView = () => {
                                 <div className="add-to-whishlist-button">
 
                                     {
-                                        whishlist
-                                            ? <Link to="/whishlist" className="btn btn-primary">View Whishlist</Link>
-                                            : <span className="btn btn-info" onClick={() => setWhishlist(true)}>Add To Whishlist</span>
+                                        currentWishlist
+                                            ? <span className="btn btn-info" onClick={() => handleAddToWishlist(quickViewItem)}>Add To Whishlist</span>
+                                            : <>
+                                                <span className="btn btn-danger" onClick={() => handleRemoveToWishlist(quickViewItem)}>
+                                                    <i className="fa fa-trash"></i> Remove from Wishlist
+                                                    </span>
+                                                <Link to="/whishlist" className="btn btn-primary" onClick={handleCloseModalBox}>
+                                                    <i className="fa fa-eye"></i> View Wishlist
+                                                </Link>
+                                            </>
                                     }
                                 </div>
                             </div>
