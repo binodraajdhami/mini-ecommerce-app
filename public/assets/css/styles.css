@@ -245,7 +245,7 @@ header{ position: relative; }
 .side-cart-item .rodal{ left: inherit; right: 0; }
 .side-cart-item .rodal-dialog{ left: inherit; right: 0; padding-right: 0; margin: inherit; border-radius: 0; width: 300px !important; height: 100% !important; }
 .side-cart-item-heading{ font-size: 18px; font-weight: 700; border-bottom: #ccc solid 1px; padding-bottom: 10px; }
-.side-cart-item-content{ overflow-y: scroll; height: calc(100% - 100px); list-style: none; }
+.side-cart-item-content{ overflow-y: scroll; height: calc(100% - 175px); list-style: none; }
 .side-cart-item-no-content{ display: block; margin-top: 30px; text-align: center; font-size: 20px; line-height: 30px; padding: 0 30px; }
 .side-cart-item-list{ display: flex; justify-content: space-between; align-items: center; padding: 15px; padding-left: 0; border-bottom: #ccc solid 1px; } 
 .side-cart-item-image{ position: relative; width: 50px; height: auto; } 

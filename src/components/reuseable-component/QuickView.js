@@ -7,7 +7,7 @@ import 'rodal/lib/rodal.css';
 
 import { QuickViewContext } from './../../contextAPI/QuickViewContext';
 import { CartItemContext } from '../../contextAPI/CartItemContext';
-import { WishlistContext } from './../../contextAPI/WishlistContext'
+import { WishlistContext } from './../../contextAPI/WishlistContext';
 
 const QuickView = () => {
 
@@ -16,7 +16,7 @@ const QuickView = () => {
     const setInVisibleItem = useContext(QuickViewContext)[3];
     const cartItems = useContext(CartItemContext)[0];
     const setCartItems = useContext(CartItemContext)[1];
-    const [wishlistItems, setWishlistItems] = useContext(WishlistContext)
+    const [wishlistItems, setWishlistItems] = useContext(WishlistContext);
 
     const [cartItem, setCartItem] = useState(0);
     const [currentWishlist, setCurrentWishlist] = useState(true);

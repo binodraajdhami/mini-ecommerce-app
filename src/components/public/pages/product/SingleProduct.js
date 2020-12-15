@@ -1,15 +1,98 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ReactImageMagnify from 'react-image-magnify';
-import Slider from 'react-slick';
 
+import { CartItemContext } from './../../../../contextAPI/CartItemContext';
+import { WishlistContext } from './../../../../contextAPI/WishlistContext';
+import { ImageGalleryContext } from './../../../../contextAPI/ImageGalleryContext';
+
+import ProductImageSlider from '../../../reuseable-component/ProductImageSlider';
 import SpecificationProduct from './ProductSpecification';
 import RelatedProduct from './RelatedProduct';
 
 const SingleProduct = () => {
 
+    const currentProduct = {
+        id: 1,
+        title: 'City Backpack Black',
+        price: '250',
+        decription: 'Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish sporty vibe.',
+        beforeImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image1.jpg',
+        afterImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image2.jpg',
+    };
+
+    const cartItems = useContext(CartItemContext)[0];
+    const setCartItems = useContext(CartItemContext)[1];
+    const [wishlistItems, setWishlistItems] = useContext(WishlistContext);
+    const [imageGallery, setImageGallery] = useContext(ImageGalleryContext);
+
     const [cartItem, setCartItem] = useState(0);
-    const [whishlist, setWhishlist] = useState(false);
+    const [currentWishlist, setCurrentWishlist] = useState(true);
+    const [selectedIndex, setSelectedIndex] = useState(0);
+
+    useEffect(() => {
+        setImageGallery(currentProduct.beforeImage);
+
+        let currentItem = cartItems.filter(e => e.id === currentProduct.id);
+        if (!currentItem.length) {
+            setCartItem(0);
+        } else {
+            setCartItem(currentItem[0].quanty);
+        }
+
+        let currentWishlist = wishlistItems.filter(e => e.id === currentProduct.id);
+        if (!currentWishlist.length) {
+            setCurrentWishlist(true);
+        } else {
+            setCurrentWishlist(false);
+        }
+    }, [
+        cartItems,
+        wishlistItems,
+        setImageGallery,
+        currentProduct.id,
+        currentProduct.beforeImage
+    ]);
+
+    const handleAddToWishlist = (item) => {
+        setWishlistItems(prevWishlistItemsItem => [...prevWishlistItemsItem, item]);
+        setCurrentWishlist(false);
+    }
+
+    const handleRemoveToWishlist = (item) => {
+        let latestWishlistItem = wishlistItems.filter(e => e.id !== item.id);
+        setWishlistItems([...latestWishlistItem]);
+        setCurrentWishlist(true);
+    }
+
+    const handleAddToCard = (item) => {
+        setCartItem(cartItem + 1);
+
+        let exitedItem = cartItems.filter(e => e.id === item.id);
+        if (!exitedItem.length) {
+            item.quanty = 1;
+            let newCartItem = cartItems.filter(e => e.id !== item.id);
+            setCartItems([...newCartItem, item]);
+        } else {
+            cartItems.map(e => e.id === item.id ? e.quanty = (e.quanty + 1) : e.quanty);
+            setCartItems(() => [...cartItems]);
+        }
+    }
+
+    const handleRemoveFromCard = (item) => {
+        setCartItem(cartItem - 1);
+
+        let exitedItem = cartItems.filter(e => e.id === item.id);
+        if (exitedItem.length) {
+            cartItems.map((e, i) => e.id === item.id
+                ? e.quanty > 1
+                    ? e.quanty = (e.quanty - 1)
+                    : cartItems.splice(i, 1)
+                : e.quanty
+            );
+            setCartItems(() => [...cartItems]);
+        }
+    }
 
     const colorLists = [
         { id: 1, color: '#1abc9c' },
@@ -19,8 +102,6 @@ const SingleProduct = () => {
         { id: 5, color: '#bdc3c7' }
     ]
 
-    const [selectedIndex, setSelectedIndex] = useState(0);
-
     let displayColor = colorLists.map((item, index) => {
         return (
             <li key={index}>
@@ -28,68 +109,6 @@ const SingleProduct = () => {
                     {index === selectedIndex ? <i className="fa fa-check"></i> : ''}
                 </span>
             </li>
-        );
-    });
-
-    const sliderOptions = {
-        dots: false,
-        autoplay: true,
-        infinite: true,
-        speed: 300,
-        slidesToShow: 8,
-        slidesToScroll: 1,
-        vertical: true,
-        verticalSwiping: true,
-    };
-
-    const [imageUrl, setImageUrl] = useState(process.env.PUBLIC_URL + '/assets/images/popular-product-image1.jpg');
-
-    const imageGallery = [
-        {
-            id: 1,
-            image: process.env.PUBLIC_URL + '/assets/images/popular-product-image1.jpg'
-        },
-        {
-            id: 2,
-            image: process.env.PUBLIC_URL + '/assets/images/popular-product-image2.jpg'
-        },
-        {
-            id: 3,
-            image: process.env.PUBLIC_URL + '/assets/images/popular-product-image3.jpg'
-        },
-        {
-            id: 4,
-            image: process.env.PUBLIC_URL + '/assets/images/popular-product-image4.jpg'
-        },
-        {
-            id: 5,
-            image: process.env.PUBLIC_URL + '/assets/images/popular-product-image5.jpg'
-        },
-        {
-            id: 6,
-            image: process.env.PUBLIC_URL + '/assets/images/popular-product-image6.jpg'
-        },
-        {
-            id: 7,
-            image: process.env.PUBLIC_URL + '/assets/images/popular-product-image7.jpg'
-        },
-        {
-            id: 8,
-            image: process.env.PUBLIC_URL + '/assets/images/popular-product-image8.jpg'
-        },
-        {
-            id: 9,
-            image: process.env.PUBLIC_URL + '/assets/images/popular-product-image9.jpg'
-        },
-        {
-            id: 10,
-            image: process.env.PUBLIC_URL + '/assets/images/popular-product-image10.jpg'
-        }
-    ]
-
-    let images = imageGallery.map((item, i) => {
-        return (
-            <img src={item.image} alt="image_gallery" key={i} onClick={() => setImageUrl(item.image)} />
         );
     });
 
@@ -122,19 +141,15 @@ const SingleProduct = () => {
                                         smallImage: {
                                             alt: 'Wristwatch by Ted Baker London',
                                             isFluidWidth: true,
-                                            src: imageUrl
+                                            src: imageGallery
                                         },
                                         largeImage: {
-                                            src: imageUrl,
+                                            src: imageGallery,
                                             width: 1400,
                                             height: 1800
                                         }
                                     }} />
-                                    <div className="product-image-gallery-slides">
-                                        <Slider {...sliderOptions}>
-                                            {images}
-                                        </Slider>
-                                    </div>
+                                    <ProductImageSlider />
                                 </div>
                             </div>
                             <div className="col-sm-7">
@@ -154,7 +169,7 @@ const SingleProduct = () => {
                                         {
                                             cartItem <= 0
                                                 ? <div className="add-to-cart-button">
-                                                    <span className="btn btn-success" onClick={() => setCartItem(cartItem + 1)}>Add To Cart</span>
+                                                    <span className="btn btn-success" onClick={() => handleAddToCard(currentProduct)}>Add To Cart</span>
                                                 </div>
                                                 : ''
                                         }
@@ -162,13 +177,13 @@ const SingleProduct = () => {
                                             cartItem > 0
                                                 ? <>
                                                     <div className="after-add-to-cart-button">
-                                                        <span className="btn btn-success" onClick={() => setCartItem(cartItem - 1)}>
+                                                        <span className="btn btn-success" onClick={() => handleRemoveFromCard(currentProduct)}>
                                                             <i className="fa fa-minus"></i>
                                                         </span>
                                                         <span className="cart-item">{cartItem}</span>
                                                         {
                                                             cartItem < 10
-                                                                ? <span className="btn btn-success" onClick={() => setCartItem(cartItem + 1)}>
+                                                                ? <span className="btn btn-success" onClick={() => handleAddToCard(currentProduct)}>
                                                                     <i className="fa fa-plus"></i>
                                                                 </span>
                                                                 : <span className="btn btn-danger">
@@ -184,9 +199,16 @@ const SingleProduct = () => {
                                         <div className="add-to-whishlist-button">
 
                                             {
-                                                whishlist
-                                                    ? <Link to="/whishlist" className="btn btn-primary">View Whishlist</Link>
-                                                    : <span className="btn btn-info" onClick={() => setWhishlist(true)}>Add To Whishlist</span>
+                                                currentWishlist
+                                                    ? <span className="btn btn-info" onClick={() => handleAddToWishlist(currentProduct)}>Add To Whishlist</span>
+                                                    : <>
+                                                        <span className="btn btn-danger" onClick={() => handleRemoveToWishlist(currentProduct)}>
+                                                            <i className="fa fa-trash"></i> Remove from Wishlist
+                                                       </span>
+                                                        <Link to="/whishlist" className="btn btn-primary">
+                                                            <i className="fa fa-eye"></i> View Wishlist
+                                                   </Link>
+                                                    </>
                                             }
                                         </div>
                                     </div>
