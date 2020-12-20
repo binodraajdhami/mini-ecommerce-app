@@ -9,7 +9,8 @@ export const QuickViewContextProvider = (props) => {
 
     return (
         <QuickViewContext.Provider value={
-            [quickViewItem,
+            [
+                quickViewItem,
                 setQuickViewItem,
                 inVisibleItem,
                 setInVisibleItem

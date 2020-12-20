@@ -7,7 +7,7 @@ const HeaderCartItem = () => {
         <div className="header-cart-item">
             <span>
                 <i className="fa fa-cart-plus"></i>  <TotalCartItem /> Items
-                </span>
+            </span>
         </div>
     );
 }
