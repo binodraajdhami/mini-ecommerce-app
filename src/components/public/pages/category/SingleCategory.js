@@ -1,142 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
+import { ProductsContext } from './../../../../contextAPI/ProductsContext';
 import ProductCard from './../../../reuseable-component/ProductCard';
 
 const SingleCategory = () => {
 
-    const allProducts = [
-        {
-            id: 1,
-            title: 'City Backpack Black',
-            price: '250',
-            decription: 'Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish sporty vibe.',
-            beforeImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image1.jpg',
-            afterImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image2.jpg',
-        },
-        {
-            id: 2,
-            title: 'Skinny Jeans In Black',
-            price: '100',
-            decription: 'Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish sporty vibe.',
-            beforeImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image3.jpg',
-            afterImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image4.jpg',
-        },
-        {
-            id: 3,
-            title: 'Mercury Tee',
-            price: '680',
-            decription: 'Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish sporty vibe.',
-            beforeImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image5.jpg',
-            afterImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image6.jpg',
-        },
-        {
-            id: 4,
-            title: 'Herschel Retreat Backpack',
-            price: '490',
-            decription: 'Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish sporty vibe.',
-            beforeImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image7.jpg',
-            afterImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image8.jpg',
-        },
-        {
-            id: 5,
-            title: 'Short Sleeved Hoodie',
-            price: '290',
-            decription: 'Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish sporty vibe.',
-            beforeImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image9.jpg',
-            afterImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image10.jpg',
-        },
-        {
-            id: 6,
-            title: 'Sweatshirt in Geometric Print',
-            price: '350',
-            decription: 'Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish sporty vibe.',
-            beforeImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image11.jpg',
-            afterImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image12.jpg',
-        },
-        {
-            id: 7,
-            title: 'Dusk Pom Beanie',
-            price: '115',
-            decription: 'Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish sporty vibe.',
-            beforeImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image13.jpg',
-            afterImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image14.jpg',
-        },
-        {
-            id: 8,
-            title: 'Circle Snapback Cap',
-            price: '750',
-            decription: 'Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish sporty vibe.',
-            beforeImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image15.jpg',
-            afterImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image16.jpg',
-        },
-        {
-            id: 9,
-            title: 'City Backpack Black',
-            price: '250',
-            decription: 'Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish sporty vibe.',
-            beforeImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image1.jpg',
-            afterImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image2.jpg',
-        },
-        {
-            id: 10,
-            title: 'Skinny Jeans In Black',
-            price: '100',
-            decription: 'Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish sporty vibe.',
-            beforeImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image3.jpg',
-            afterImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image4.jpg',
-        },
-        {
-            id: 11,
-            title: 'Mercury Tee',
-            price: '680',
-            decription: 'Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish sporty vibe.',
-            beforeImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image5.jpg',
-            afterImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image6.jpg',
-        },
-        {
-            id: 12,
-            title: 'Herschel Retreat Backpack',
-            price: '490',
-            decription: 'Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish sporty vibe.',
-            beforeImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image7.jpg',
-            afterImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image8.jpg',
-        },
-        {
-            id: 13,
-            title: 'Short Sleeved Hoodie',
-            price: '290',
-            decription: 'Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish sporty vibe.',
-            beforeImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image9.jpg',
-            afterImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image10.jpg',
-        },
-        {
-            id: 14,
-            title: 'Sweatshirt in Geometric Print',
-            price: '350',
-            decription: 'Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish sporty vibe.',
-            beforeImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image11.jpg',
-            afterImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image12.jpg',
-        },
-        {
-            id: 15,
-            title: 'Dusk Pom Beanie',
-            price: '115',
-            decription: 'Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish sporty vibe.',
-            beforeImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image13.jpg',
-            afterImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image14.jpg',
-        },
-        {
-            id: 16,
-            title: 'Circle Snapback Cap',
-            price: '750',
-            decription: 'Go sporty this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish sporty vibe.',
-            beforeImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image15.jpg',
-            afterImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image16.jpg',
-        }
-    ]
+    const [products] = useContext(ProductsContext);
 
-    const product = allProducts.map((item, i) => {
+    const product = products.filter(item => item.category === 'female').map((item, i) => {
         let productUrl = `/product/${item.id}`;
         return (
             <div key={i} className="col-md-3">

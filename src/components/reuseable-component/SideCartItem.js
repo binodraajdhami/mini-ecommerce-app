@@ -51,7 +51,7 @@ const SideCartItem = () => {
                             </tr>
                         </tbody>
                     </table>
-                    <Link to="/checkout" onClick={handleModalInVisible}>Checkout Now</Link>
+                    <Link to="/shopping/cart" onClick={handleModalInVisible}>View Carts</Link>
                 </div>
             </Rodal>
         </div>

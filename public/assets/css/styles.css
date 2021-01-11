@@ -328,11 +328,11 @@ header{ position: relative; }
 .auth-info ul li a{ text-decoration: none; }
 .auth-info ul li a .fab{ display: flex; justify-content: center; align-items: center; background: #fff; font-size: 36px; margin: 0 5px; width: 60px; height: 60px; border-radius: 50%; box-sizing: border-box; box-shadow: 0 5px 15px -5px #000; -webkit-transition: all linear 0.3s; -moz-transition: all linear 0.3s; transition: all linear 0.3s; }
 .auth-info ul li:nth-child(1) a .fab{ color: #C3002F; }
-.auth-info ul li:nth-child(2) a .fab{ color: #61DAFB; }
-.auth-info ul li:nth-child(3) a .fab{ color: #41B883; }
+.auth-info ul li:nth-child(2) a .fab{ color: #20232a; }
+.auth-info ul li:nth-child(3) a .fab{ color: #42b983; }
 .auth-info ul li:nth-child(1) a:hover .fab{ background: #C3002F; color: #fff; }
-.auth-info ul li:nth-child(2) a:hover .fab{ background: #61DAFB; color: #fff; }
-.auth-info ul li:nth-child(3) a:hover .fab{ background: #41B883; color: #fff; }
+.auth-info ul li:nth-child(2) a:hover .fab{ background: #20232a; color: #61dafb; }
+.auth-info ul li:nth-child(3) a:hover .fab{ background: #42b983; color: #fff; }
 .auth-info img{ -webkit-animation: mover 2s infinite  alternate; animation: mover 1s infinite  alternate; }
 @-webkit-keyframes mover {
     0% { transform: translateY(0); }
@@ -355,7 +355,8 @@ header{ position: relative; }
 .login-form-block .btn{ float: none; }
 
 /*========== Product Arhive Page ==========*/
-
+.filter-content h4{ display: block; padding: 10px 15px; background: #495057; color: #fff; font-size: 16px; }
+.filter-content .radio{ display: block; }
 
 /*========== Single Product Page ==========*/
 /* Image Gallery */

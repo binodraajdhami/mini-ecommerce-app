@@ -20,12 +20,12 @@ const authRouting = () => {
                             <p>This Ecommerce App is available in multi platform JavaScript framework Angular, React and Vue.</p>
                             <ul>
                                 <li>
-                                    <a href="http://mini-ecommerce-react-app.herokuapp.com">
+                                    <a href="https://mini-ecommerce-angular-app.herokuapp.com">
                                         <i className="fab fa-angular"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://mini-ecommerce-angular-app.herokuapp.com">
+                                    <a href="https://mini-ecommerce-react-app.herokuapp.com">
                                         <i className="fab fa-react"></i>
                                     </a>
                                 </li>
@@ -43,7 +43,7 @@ const authRouting = () => {
                             <Route exact path="/auth/register" component={Register} />
                             <Route exact path="/auth/forgot-password" component={ForgotPassword} />
                             <Route exact path="/auth/reset-password" component={ResetPassword} />
-                            <Redirect path="/auth/" to="/auth/login" />
+                            <Redirect path="/auth/" to="/home" />
                         </Switch>
                     </div>
                 </div>
