@@ -10,20 +10,20 @@ const CheckoutPage = () => {
                         <h4>
                             <Link to="/">Home</Link>
                             <i className="fa fa-angle-double-right"></i>
-                            Checkout
+                            Shopping Checkout
                         </h4>
                         <ul>
                             <li>&nbsp;</li>
                             <li>&nbsp;</li>
                             <li>&nbsp;</li>
                         </ul>
-                        <h3>Checkout Page</h3>
+                        <h3>Shopping Checkout Page</h3>
                     </div>
                 </div>
             </div>
             <div className="content">
                 <div className="container">
-                    <h2>Checkout Now</h2>
+                    <h2>Shopping Checkout Now</h2>
                     <p>Under development...</p>
                 </div>
             </div>

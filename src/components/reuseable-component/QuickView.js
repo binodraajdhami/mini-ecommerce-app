@@ -49,7 +49,7 @@ const QuickView = () => {
         setCurrentWishlist(true);
     }
 
-    const handleAddToCard = (item) => {
+    const handleAddToCart = (item) => {
         setCartItem(cartItem + 1);
 
         let exitedItem = cartItems.filter(e => e.id === item.id);
@@ -63,7 +63,7 @@ const QuickView = () => {
         }
     }
 
-    const handleRemoveFromCard = (item) => {
+    const handleRemoveFromCart = (item) => {
         setCartItem(cartItem - 1);
 
         let exitedItem = cartItems.filter(e => e.id === item.id);
@@ -150,7 +150,7 @@ const QuickView = () => {
                                 {
                                     cartItem <= 0
                                         ? <div className="add-to-cart-button">
-                                            <span className="btn btn-success" onClick={() => handleAddToCard(quickViewItem)}>Add To Cart</span>
+                                            <span className="btn btn-success" onClick={() => handleAddToCart(quickViewItem)}>Add To Cart</span>
                                         </div>
                                         : ''
                                 }
@@ -158,13 +158,13 @@ const QuickView = () => {
                                     cartItem > 0
                                         ? <>
                                             <div className="after-add-to-cart-button">
-                                                <span className="btn btn-success" onClick={() => handleRemoveFromCard(quickViewItem)}>
+                                                <span className="btn btn-success" onClick={() => handleRemoveFromCart(quickViewItem)}>
                                                     <i className="fa fa-minus"></i>
                                                 </span>
                                                 <span className="cart-item">{cartItem}</span>
                                                 {
                                                     cartItem < 10
-                                                        ? <span className="btn btn-success" onClick={() => handleAddToCard(quickViewItem)}>
+                                                        ? <span className="btn btn-success" onClick={() => handleAddToCart(quickViewItem)}>
                                                             <i className="fa fa-plus"></i>
                                                         </span>
                                                         : <span className="btn btn-danger">
@@ -172,7 +172,7 @@ const QuickView = () => {
                                                         </span>
                                                 }
                                             </div>
-                                            <Link to="/cart" className="btn btn-primary view-cart" onClick={handleCloseModalBox}>View Cart</Link>
+                                            <Link to="/shopping/cart" className="btn btn-primary view-cart" onClick={handleCloseModalBox}>View Cart</Link>
                                         </>
                                         : ''
                                 }
@@ -186,7 +186,7 @@ const QuickView = () => {
                                                 <span className="btn btn-danger" onClick={() => handleRemoveToWishlist(quickViewItem)}>
                                                     <i className="fa fa-trash"></i> Remove from Wishlist
                                                     </span>
-                                                <Link to="/whishlist" className="btn btn-primary" onClick={handleCloseModalBox}>
+                                                <Link to="/shopping/wishlist" className="btn btn-primary" onClick={handleCloseModalBox}>
                                                     <i className="fa fa-eye"></i> View Wishlist
                                                 </Link>
                                             </>
