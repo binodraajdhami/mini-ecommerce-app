@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { CartItemContext } from './../../contextAPI/CartItemContext';
@@ -12,8 +12,18 @@ const ProductCard = ({ product, productUrl }) => {
     const setQuickViewItem = useContext(QuickViewContext)[1];
     const setInVisibleItem = useContext(QuickViewContext)[3];
 
-    const handleAddToCard = (item) => {
+    const [currentItem, setCurrentItem] = useState(false);
 
+    useEffect(() => {
+        let exitedItem = cartItems.filter(e => e.id === product.id);
+        if (exitedItem.length) {
+            setCurrentItem(true);
+        } else {
+            setCurrentItem(false);
+        }
+    }, [cartItems, product]);
+
+    const handleAddToCard = (item) => {
         let exitedItem = cartItems.filter(e => e.id === item.id);
         if (!exitedItem.length) {
             item.quanty = 1;
@@ -51,11 +61,15 @@ const ProductCard = ({ product, productUrl }) => {
                         </li>
                     </ul>
                 </div>
-                <span className="whishlist">
-                    <span>
-                        <i className="fa fa-heart"></i>
-                    </span>
-                </span>
+                {
+                    currentItem
+                        ? ''
+                        : <span className="whishlist" title="Add To Wishlist">
+                            <span>
+                                <i className="fa fa-heart"></i>
+                            </span>
+                        </span>
+                }
                 <span className="discount-offer">
                     25% Off
                         </span>
