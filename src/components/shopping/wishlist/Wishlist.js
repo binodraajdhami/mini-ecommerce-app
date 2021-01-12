@@ -7,12 +7,14 @@ import { CartItemContext } from './../../../contextAPI/CartItemContext';
 const WishlistPage = () => {
 
     const [cartItems, setCartItems] = useContext(CartItemContext);
+    const setIsVisibleSideCartItem = useContext(CartItemContext)[3];
     const [wishlistItems, setWishlistItems] = useContext(WishlistContext);
 
     const handleAddToCart = (item, index) => {
         item.quanty = 1;
         let newCartItem = cartItems.filter(e => e.id !== item.id);
         setCartItems([...newCartItem, item]);
+        setIsVisibleSideCartItem(true);
         handleRemoveItemWishlist(item.id, index);
     }
 
