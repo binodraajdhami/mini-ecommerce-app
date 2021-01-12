@@ -10,14 +10,14 @@ const CheckoutPage = () => {
                         <h4>
                             <Link to="/">Home</Link>
                             <i className="fa fa-angle-double-right"></i>
-                            Shopping Checkout
+                            Checkout
                         </h4>
                         <ul>
                             <li>&nbsp;</li>
                             <li>&nbsp;</li>
                             <li>&nbsp;</li>
                         </ul>
-                        <h3>Shopping Checkout Page</h3>
+                        <h3>Shopping Checkout</h3>
                     </div>
                 </div>
             </div>

@@ -414,6 +414,14 @@ header{ position: relative; }
 .shopping-cart .shopping-cart-total .btn{ display: block; width: 100%; border-radius: 0; }
 
 /*========== Shopping Wishlist Page ==========*/
+.shopping-wishlist .table tbody tr td span{ display: flex; align-items: center; height: 125px; }
+.shopping-wishlist .wishlist-product-image-td{ width: 130px; }
+.shopping-wishlist .wishlist-product-image{ width: 100px; }
+.shopping-wishlist .wishlist-product-image-td img{ width: 100%; }
+.shopping-wishlist .wishlist-product-title a{ text-decoration: none; color: #333; font-size: 16px; }
+.shopping-wishlist .wishlist-product-add-to-cart .btn,
+.shopping-wishlist .wishlist-product-remove .btn{ border-radius: 0; }
+.shopping-wishlist .wishlist-product-remove-td{ width: 130px; }
 
 /*========== Shopping Checkout Page ==========*/
 

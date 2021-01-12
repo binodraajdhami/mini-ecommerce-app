@@ -14,8 +14,7 @@ const QuickView = () => {
     const quickViewItem = useContext(QuickViewContext)[0];
     const inVisibleItem = useContext(QuickViewContext)[2];
     const setInVisibleItem = useContext(QuickViewContext)[3];
-    const cartItems = useContext(CartItemContext)[0];
-    const setCartItems = useContext(CartItemContext)[1];
+    const [cartItems, setCartItems] = useContext(CartItemContext);
     const [wishlistItems, setWishlistItems] = useContext(WishlistContext);
 
     const [cartItem, setCartItem] = useState(0);
@@ -61,6 +60,8 @@ const QuickView = () => {
             cartItems.map(e => e.id === item.id ? e.quanty = (e.quanty + 1) : e.quanty);
             setCartItems(() => [...cartItems]);
         }
+
+        handleRemoveToWishlist(item);
     }
 
     const handleRemoveFromCart = (item) => {
@@ -150,7 +151,7 @@ const QuickView = () => {
                                 {
                                     cartItem <= 0
                                         ? <div className="add-to-cart-button">
-                                            <span className="btn btn-success" onClick={() => handleAddToCart(quickViewItem)}>Add To Cart</span>
+                                            <span className="btn btn-success" title="Add To Cart" onClick={() => handleAddToCart(quickViewItem)}>Add To Cart</span>
                                         </div>
                                         : ''
                                 }
@@ -172,26 +173,32 @@ const QuickView = () => {
                                                         </span>
                                                 }
                                             </div>
-                                            <Link to="/shopping/cart" className="btn btn-primary view-cart" onClick={handleCloseModalBox}>View Cart</Link>
+                                            <Link to="/shopping/cart" title="View Cart" className="btn btn-primary view-cart" onClick={handleCloseModalBox}>
+                                                <i className="fa fa-eye"></i> View Cart
+                                            </Link>
                                         </>
                                         : ''
                                 }
 
-                                <div className="add-to-whishlist-button">
-
-                                    {
-                                        currentWishlist
-                                            ? <span className="btn btn-info" onClick={() => handleAddToWishlist(quickViewItem)}>Add To Whishlist</span>
-                                            : <>
-                                                <span className="btn btn-danger" onClick={() => handleRemoveToWishlist(quickViewItem)}>
-                                                    <i className="fa fa-trash"></i> Remove from Wishlist
-                                                    </span>
-                                                <Link to="/shopping/wishlist" className="btn btn-primary" onClick={handleCloseModalBox}>
-                                                    <i className="fa fa-eye"></i> View Wishlist
+                                {
+                                    cartItem === 0
+                                        ? <div className="add-to-whishlist-button">
+                                            {
+                                                currentWishlist
+                                                    ? <span className="btn btn-info" title="Add To Wishlist" onClick={() => handleAddToWishlist(quickViewItem)}>Add To Whishlist</span>
+                                                    : <>
+                                                        <Link to="/shopping/wishlist" title="View Wishlist" className="btn btn-primary" onClick={handleCloseModalBox}>
+                                                            <i className="fa fa-eye"></i> View Wishlist
                                                 </Link>
-                                            </>
-                                    }
-                                </div>
+                                                        <span className="btn btn-danger" title="Remove From Wishlist" onClick={() => handleRemoveToWishlist(quickViewItem)}>
+                                                            <i className="fa fa-trash"></i>
+                                                        </span>
+                                                    </>
+                                            }
+                                        </div>
+                                        : ''
+                                }
+
                             </div>
                             <div className="product-category-info">
                                 <h4>Category</h4>

@@ -38,13 +38,13 @@ const ProductCard = ({ product, productUrl }) => {
                 <div className="hover-layer">
                     <ul>
                         <li>
-                            <div className="button button-ripple" onClick={() => handleQuickView(product)}>
+                            <div className="button button-ripple" title="Quick View" onClick={() => handleQuickView(product)}>
                                 <div className="move-to-top">Quick View</div>
                                 <i className="fa fa-eye"></i>
                             </div>
                         </li>
                         <li>
-                            <div className="button button-ripple" onClick={() => handleAddToCard(product)}>
+                            <div className="button button-ripple" title="Add To Cart" onClick={() => handleAddToCard(product)}>
                                 <div className="move-to-top">Add To Cart</div>
                                 <i className="fa fa-shopping-cart"></i>
                             </div>

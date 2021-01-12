@@ -7,8 +7,7 @@ import TotalPrice from './../../reuseable-component/TotalPrice';
 
 const CartPage = () => {
 
-    const cartItems = useContext(CartItemContext)[0];
-    const setCartItems = useContext(CartItemContext)[1];
+    const [cartItems, setCartItems] = useContext(CartItemContext);
 
     const handleAddToCart = (item) => {
         let exitedItem = cartItems.filter(e => e.id === item.id);
@@ -37,13 +36,13 @@ const CartPage = () => {
 
     const handleRemoveItemFromCart = (id, index) => {
         let newCartItems = cartItems;
-        newCartItems.splice(index, 1)
+        newCartItems.splice(index, 1);
         setCartItems(() => [...newCartItems]);
     }
 
-    let carts = cartItems.length
+    let items = cartItems.length
         ? cartItems.map((item, i) => {
-            let prouctUrl = `/product/${item.id}`;
+            let productUrl = `/product/${item.id}`;
             return (
                 <tr key={i}>
                     <td>
@@ -58,7 +57,7 @@ const CartPage = () => {
                     </td>
                     <td>
                         <span className="cart-product-title">
-                            <Link to={prouctUrl}>
+                            <Link to={productUrl}>
                                 {item.title}
                             </Link>
                         </span>
@@ -101,7 +100,7 @@ const CartPage = () => {
                         <h4>
                             <Link to="/">Home</Link>
                             <i className="fa fa-angle-double-right"></i>
-                            Shopping Cart
+                            Cart
                         </h4>
                         <ul>
                             <li>&nbsp;</li>
@@ -115,7 +114,7 @@ const CartPage = () => {
             <div className="content">
                 <div className="container">
                     <div className="shopping-cart">
-                        <h2>Shopping Cart Items</h2>
+                        <h2>Shopping Cart</h2>
                         {
                             cartItems.length > 0
                                 ? <>
@@ -124,14 +123,14 @@ const CartPage = () => {
                                             <tr>
                                                 <th>#</th>
                                                 <th>Image</th>
-                                                <th>Name</th>
+                                                <th>Title</th>
                                                 <th>Quantity</th>
                                                 <th>Price ( Rate * Quantity )</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {carts}
+                                            {items}
                                         </tbody>
                                     </table>
                                     <div className="shopping-cart-total">

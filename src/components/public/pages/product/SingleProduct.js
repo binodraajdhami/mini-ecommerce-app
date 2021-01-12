@@ -21,8 +21,7 @@ const SingleProduct = () => {
         afterImage: process.env.PUBLIC_URL + '/assets/images/popular-product-image2.jpg',
     };
 
-    const cartItems = useContext(CartItemContext)[0];
-    const setCartItems = useContext(CartItemContext)[1];
+    const [cartItems, setCartItems] = useContext(CartItemContext);
     const [wishlistItems, setWishlistItems] = useContext(WishlistContext);
     const [imageGallery, setImageGallery] = useContext(ImageGalleryContext);
 
@@ -77,6 +76,8 @@ const SingleProduct = () => {
             cartItems.map(e => e.id === item.id ? e.quanty = (e.quanty + 1) : e.quanty);
             setCartItems(() => [...cartItems]);
         }
+
+        handleRemoveToWishlist(item);
     }
 
     const handleRemoveFromCard = (item) => {
@@ -168,7 +169,7 @@ const SingleProduct = () => {
                                         <p>Only 10 item in stock</p>
                                         {
                                             cartItem <= 0
-                                                ? <div className="add-to-cart-button">
+                                                ? <div className="add-to-cart-button" title="Add To Cart">
                                                     <span className="btn btn-success" onClick={() => handleAddToCard(currentProduct)}>Add To Cart</span>
                                                 </div>
                                                 : ''
@@ -191,26 +192,31 @@ const SingleProduct = () => {
                                                                 </span>
                                                         }
                                                     </div>
-                                                    <Link to="/cart" className="btn btn-danger view-cart">View Cart</Link>
+                                                    <Link to="/cart" title="View Cart" className="btn btn-primary view-cart">View Cart</Link>
                                                 </>
                                                 : ''
                                         }
 
-                                        <div className="add-to-whishlist-button">
+                                        {
+                                            cartItem === 0
+                                                ? <div className="add-to-whishlist-button">
 
-                                            {
-                                                currentWishlist
-                                                    ? <span className="btn btn-info" onClick={() => handleAddToWishlist(currentProduct)}>Add To Whishlist</span>
-                                                    : <>
-                                                        <span className="btn btn-danger" onClick={() => handleRemoveToWishlist(currentProduct)}>
-                                                            <i className="fa fa-trash"></i> Remove from Wishlist
-                                                       </span>
-                                                        <Link to="/whishlist" className="btn btn-primary">
-                                                            <i className="fa fa-eye"></i> View Wishlist
-                                                   </Link>
-                                                    </>
-                                            }
-                                        </div>
+                                                    {
+                                                        currentWishlist
+                                                            ? <span className="btn btn-info" title="Add to Wishlist" onClick={() => handleAddToWishlist(currentProduct)}>Add To Whishlist</span>
+                                                            : <>
+                                                                <Link to="/shopping/wishlist" title="View Wishlist" className="btn btn-primary">
+                                                                    <i className="fa fa-eye"></i> View Wishlist
+                                                        </Link>
+                                                                <span className="btn btn-danger" title="Remove from Wishlist" onClick={() => handleRemoveToWishlist(currentProduct)}>
+                                                                    <i className="fa fa-trash"></i>
+                                                                </span>
+                                                            </>
+                                                    }
+                                                </div>
+                                                : ''
+                                        }
+
                                     </div>
                                     <div className="product-category-info">
                                         <h4>Category</h4>
