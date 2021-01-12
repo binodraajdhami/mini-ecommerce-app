@@ -121,6 +121,9 @@ header{ position: relative; }
 .product-content-item:hover .product-thumbnail .hover-layer{ top: 53%; opacity: 1; }
 .product-content-item .product-thumbnail .whishlist{ position: absolute; top: 15px; left: 15px; z-index: 9; cursor: pointer; color: #666; font-size: 24px; -webkit-transition: all linear 0.1s; -moz-transition: all linear 0.1s; -o-transition: all linear 0.1s; transition: all linear 0.1s; }
 .product-content-item .product-thumbnail .whishlist:hover{ color: #dd0031; }
+.product-content-item .product-thumbnail .whishlist span{ display: block; }
+.product-content-item .product-thumbnail .whishlist span a{ position: relative; left: -2px; color: #666; }
+.product-content-item .product-thumbnail .whishlist:hover span a{ color: #dd0031; }
 .product-content-item .product-thumbnail .discount-offer{ position: absolute; top: 15px; right: 15px; z-index: 9; display: flex; justify-content: center; align-items: center; width: 60px; height: 30px; text-align: center; background: #666; color: #fff; font-size: 14px; }
 .product-content-item .product-thumbnail .discount-offer::before{ content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: -1; width: 130%; height: 80%; background: #666; clip-path: polygon(100% 0%, 90% 50%, 100% 100%, 0 100%, 10% 50%, 0 0); }
 .product-content-item .product-thumbnail .hover-layer ul li{ list-style: none; text-align: center; color: #fff; font-size: 0; }

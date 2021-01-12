@@ -3,25 +3,44 @@ import { Link } from 'react-router-dom';
 
 import { CartItemContext } from './../../contextAPI/CartItemContext';
 import { QuickViewContext } from './../../contextAPI/QuickViewContext';
+import { WishlistContext } from './../../contextAPI/WishlistContext';
 
 const ProductCard = ({ product, productUrl }) => {
 
     const cartItems = useContext(CartItemContext)[0];
     const setCartItems = useContext(CartItemContext)[1];
+    const [wishlistItems, setWishlistItems] = useContext(WishlistContext);
     const setIsVisibleSideCartItem = useContext(CartItemContext)[3];
     const setQuickViewItem = useContext(QuickViewContext)[1];
     const setInVisibleItem = useContext(QuickViewContext)[3];
 
     const [currentItem, setCurrentItem] = useState(false);
+    const [wishlistBtn, setWishlistBtn] = useState(true);
 
     useEffect(() => {
-        let exitedItem = cartItems.filter(e => e.id === product.id);
-        if (exitedItem.length) {
+        let currentCart = cartItems.filter(e => e.id === product.id);
+        if (currentCart.length) {
+            setWishlistBtn(false);
+        } else {
+            setWishlistBtn(true);
+        }
+        let currentWishlist = wishlistItems.filter(e => e.id === product.id);
+        if (currentWishlist.length) {
             setCurrentItem(true);
         } else {
             setCurrentItem(false);
         }
-    }, [cartItems, product]);
+    }, [cartItems, wishlistItems, product]);
+
+    const handleAddToWishlist = (item) => {
+        setWishlistItems(prevWishlistItemsItem => [...prevWishlistItemsItem, item]);
+        setCurrentItem(true);
+    }
+    const handleRemoveToWishlist = (item) => {
+        let latestWishlistItem = wishlistItems.filter(e => e.id !== item.id);
+        setWishlistItems([...latestWishlistItem]);
+        setCurrentItem(false);
+    }
 
     const handleAddToCard = (item) => {
         let exitedItem = cartItems.filter(e => e.id === item.id);
@@ -33,6 +52,8 @@ const ProductCard = ({ product, productUrl }) => {
             cartItems.map(e => e.id === item.id ? e.quanty = (e.quanty + 1) : e.quanty);
             setCartItems(() => [...cartItems]);
         }
+        setCurrentItem(false);
+        handleRemoveToWishlist(item)
         setIsVisibleSideCartItem(true);
     }
 
@@ -62,14 +83,28 @@ const ProductCard = ({ product, productUrl }) => {
                     </ul>
                 </div>
                 {
-                    currentItem
-                        ? ''
-                        : <span className="whishlist" title="Add To Wishlist">
-                            <span>
-                                <i className="fa fa-heart"></i>
-                            </span>
+                    wishlistBtn
+                        ? <span className="whishlist">
+                            {
+                                currentItem
+                                    ? <>
+                                        <span title="Remove from Wishlist" onClick={() => handleRemoveToWishlist(product)}>
+                                            <i className="fa fa-trash"></i>
+                                        </span>
+                                        <span title="View Wishlist">
+                                            <Link to="/shopping/wishlist">
+                                                <i className="fa fa-eye"></i>
+                                            </Link>
+                                        </span>
+                                    </>
+                                    : <span title="Add To Wishlist" onClick={() => handleAddToWishlist(product)}>
+                                        <i className="fa fa-heart"></i>
+                                    </span>
+                            }
                         </span>
+                        : ''
                 }
+
                 <span className="discount-offer">
                     25% Off
                         </span>
