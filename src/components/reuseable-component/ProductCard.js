@@ -14,18 +14,18 @@ const ProductCard = ({ product, productUrl }) => {
     const setQuickViewItem = useContext(QuickViewContext)[1];
     const setInVisibleItem = useContext(QuickViewContext)[3];
 
-    const [currentItem, setCurrentItem] = useState(false);
     const [wishlistBtn, setWishlistBtn] = useState(true);
+    const [currentItem, setCurrentItem] = useState(false);
 
     useEffect(() => {
         let currentCart = cartItems.filter(e => e.id === product.id);
-        if (currentCart.length) {
+        if (currentCart.length > 0) {
             setWishlistBtn(false);
         } else {
             setWishlistBtn(true);
         }
         let currentWishlist = wishlistItems.filter(e => e.id === product.id);
-        if (currentWishlist.length) {
+        if (currentWishlist.length > 0) {
             setCurrentItem(true);
         } else {
             setCurrentItem(false);
