@@ -15,3 +15,6 @@
 <pre>
     npm start
 </pre>
+
+## Live Demo link
+<a href="https://min-ecomerce-app.netlify.app/" target="_black">Live Link</a>
